@@ -7,14 +7,23 @@ export default function TrackerInput() {
         setEntry(event.target.value)
     }
 
+    function handleSubmit(event) {
+        event.preventDefault()
+        if (entry === "") {
+            return;
+        }
+        setEntry("")
+    }
+
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <input 
                 type="text"
                 value={entry}
                 onChange={handleInputChange}
             />
             {entry === "" ? <p>No entry yet</p> : <p>Current entry: {entry}</p>}
+            <button>Save Entry</button>
         </form>
     )
 }
