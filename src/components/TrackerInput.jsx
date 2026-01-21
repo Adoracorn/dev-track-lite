@@ -17,6 +17,12 @@ export default function TrackerInput() {
         setEntry("")
     }
 
+    function handleDeleteEntry(index) {
+        const newEntries = [...entries];
+        newEntries.splice(index, 1);
+        setEntries(newEntries)
+    }
+
     return(
         <div>
             <form onSubmit={handleSubmit}>
@@ -30,10 +36,13 @@ export default function TrackerInput() {
             </form>
             <ul>
                 {entries.map((entry, index) => (
-                    <li key={index + 1}>{entry}</li>
+                    <li key={index}>
+                        {entry}
+                        <button onClick={() => handleDeleteEntry(index)}>Delete</button>    
+                    </li> 
                 ))}
             </ul>
-            <button onClick={() => {setEntries([])}}>Clear Entries</button>
+            <button onClick={() => {setEntries([])}}>Clear All Entries</button>
         </div>
     )
 }
